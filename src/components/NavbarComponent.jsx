@@ -1,59 +1,62 @@
 import React from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
-import { BiSearch, BiBellPlus } from 'react-icons/bi';
-import { Link } from 'react-router-dom'; 
+import netflixLogo from '../assets/netflix_logo.png';
+// import { Navbar, Nav } from 'react-bootstrap';
+// import { BiSearch, BiBellPlus } from 'react-icons/bi';
+// import { Link } from 'react-router-dom'; 
 import '../App.css';
+
 
 export default function NavbarComponent() {
   return (
-    <header>
-      <Navbar expand="lg" bg="black" className="px-4">
-        <div className="container-fluid">
-          <Navbar.Brand href="#">
-            <img src="assets/netflix_logo.png" alt="" width="100px" />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarSupportedContent" />
-          <Navbar.Collapse id="navbarSupportedContent">
-            <Nav className="me-auto mb-2 mb-lg-0">
-              <Nav.Item>
-                <Link to="#" className="nav-link text-white" aria-current="page">
-                  Home
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link to="#" className="nav-link text-white">
-                  TV Shows
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link to="#" className="nav-link text-white">
-                  Movies
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link to="#" className="nav-link text-white">
-                  Recently Added
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link to="#" className="nav-link text-white">
-                  My List
-                </Link>
-              </Nav.Item>
-            </Nav>
-            <div className="d-flex">
-              <BiSearch className="text-white px-2" />
-              <h2 className="text-white fs-5 px-2">KIDS</h2>
-              <BiBellPlus className="text-white px-2 mr-5" />
-              <div className="px-2">
-                <Link to="/profile">
-                  <img src="assets/avatar.png" alt="" width="30px" />
-                </Link>
-              </div>
-            </div>
-          </Navbar.Collapse>
-        </div>
-      </Navbar>
-    </header>
+    <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: '#221f1f' }}>
+    <a className="navbar-brand" href="#">
+      <img src={netflixLogo}  style={{ width: '100px', height: '55px' }} alt="Logo" />
+    </a>
+    <button
+      className="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span className="navbar-toggler-icon"></span>
+    </button>
+
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav mr-auto">
+        <li className="nav-item">
+          <a className="nav-link font-weight-bold" href="#">
+            Home <span className="sr-only">(current)</span>
+          </a>
+        </li>
+        <li className="nav-item active">
+          <a className="nav-link font-weight-bold" href="#">
+            TV Shows
+          </a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link font-weight-bold" href="#">
+            Movies
+          </a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link font-weight-bold" href="#">
+            Recently Added
+          </a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link font-weight-bold" href="#">
+            My List
+          </a>
+        </li>
+      </ul>
+      <i className="fa fa-search icons"></i>
+      <div id="kids">KIDS</div>
+      <i className="fa fa-bell icons"></i>
+      <i className="fa fa-user icons"></i>
+    </div>
+  </nav>
   )
 }
