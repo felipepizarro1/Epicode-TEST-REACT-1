@@ -13,7 +13,8 @@ class App extends Component {
     this.state = {
       StarWarsData: [],
       HarryPotterData: [],
-      LordData: [],
+      Avengers: [],
+      loading: true,
     };
   }
 
@@ -32,26 +33,53 @@ class App extends Component {
     .then(data => this.setState({ HarryPotterData: data }))
     .catch(error => console.error('Error fetching data:', error));
 
-    //Lord of the ring
-    fetch('https://www.omdbapi.com/?s=Lord%20of%20the%20ring&apikey=bb3165a1')
+    //Avengers
+    fetch('https://www.omdbapi.com/?s=Avengers&apikey=bb3165a1')
     .then(response => response.json())
-    .then(data => this.setState({ HarryPotterData: data }))
-    .catch(error => console.error('Error fetching data:', error));
+    .then(data => this.setState({ Avengers: data }))
+    .catch(error => console.error('Error fetching data:', error))
+    .finally(() => {
+      // Cuando todas las llamadas fetch se completen, actualiza el estado de carga
+      this.setState({ loading: false });
+    });
+    
   }
 
   render() {
+
+    const { loading, StarWarsData, HarryPotterData, LordData } = this.state;
+
+    if (loading) {
+      return <p>Loading...</p>; // Muestra un indicador de carga mientras esperas los datos
+    }
+
+
+    const starWarsSaga = this.state.StarWarsData.Search.length > 0
+      ? "Related to " + this.state.StarWarsData.Search[0].Title
+      : "No related saga available";
+
+    const harryPotterSaga = this.state.HarryPotterData.Search.length > 0
+      ? "Related to " + this.state.HarryPotterData.Search[0].Title
+      : "No related saga available";
+
+    const avengersSaga = this.state.Avengers.Search.length > 0
+      ? "Related to " + this.state.Avengers.Search[0].Title
+      : "No related saga available";
+
+
     return (
       
       <div className="App">
-        {console.log(this.state.StarWarsData)}
-        {console.log(this.state.HarryPotterData)}
-        {console.log(this.state.LordData)}
+        {console.log('estos es antes del Search', this.state.StarWarsData)}
+        {console.log(this.state.StarWarsData.Search)}
+        {console.log(this.state.HarryPotterData.Search)}
+        {console.log(this.state.Avengers.Search)}
         <NavbarComponent />
         <div className="container-fluid px-4">
           <TitleContentComponent />
-          <GalleryContentComponent data={this.state.galleryData} />
-          <GalleryContentComponent data={this.state.galleryData} />
-          <GalleryContentComponent data={this.state.galleryData} />
+          <GalleryContentComponent data={this.state.StarWarsData.Search} saga={starWarsSaga} />
+          <GalleryContentComponent data={this.state.HarryPotterData.Search} saga={harryPotterSaga} />
+          <GalleryContentComponent data={this.state.Avengers.Search} saga={avengersSaga} />
           <FooterComponent />
         </div>
       </div>
