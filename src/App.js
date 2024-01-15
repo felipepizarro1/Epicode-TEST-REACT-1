@@ -54,15 +54,18 @@ class App extends Component {
     }
 
 
-    const starWarsSaga = this.state.StarWarsData.Search.length > 0
+    const starWarsSaga = this.state.StarWarsData && // Verifica si this.state.StarWarsData está definido
+    this.state.StarWarsData.Search && this.state.StarWarsData.Search.length > 0
       ? "Related to " + this.state.StarWarsData.Search[0].Title
       : "No related saga available";
 
-    const harryPotterSaga = this.state.HarryPotterData.Search.length > 0
+    const harryPotterSaga = this.state.HarryPotterData && // Verifica si this.state.StarWarsData está definido
+    this.state.HarryPotterData.Search && this.state.HarryPotterData.Search.length > 0
       ? "Related to " + this.state.HarryPotterData.Search[0].Title
       : "No related saga available";
 
-    const avengersSaga = this.state.Avengers.Search.length > 0
+    const avengersSaga = this.state.Avengers && // Verifica si this.state.StarWarsData está definido
+    this.state.Avengers.Search && this.state.Avengers.Search.length > 0
       ? "Related to " + this.state.Avengers.Search[0].Title
       : "No related saga available";
 
